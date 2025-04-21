@@ -44,7 +44,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="w-full px-4 sm:px-8">
       <input
         type="text"
         placeholder="Szukaj Pokémona..."
@@ -53,7 +53,7 @@ const Home = () => {
         className="w-full p-2 rounded border mb-6"
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 mt-8">
         {currentPokemons.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}

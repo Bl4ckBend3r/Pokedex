@@ -1,22 +1,35 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PokemonCard = ({ pokemon }) => {
-  const navigate = useNavigate();
-
   return (
-    <div
-      onClick={() => navigate(`/pokemon/${pokemon.id}`)}
-      className="bg-white text-black rounded shadow p-4 cursor-pointer hover:scale-105 transition"
-    >
-      <img src={pokemon.image} alt={pokemon.name} className="w-full h-32 object-contain mb-2" />
-      <h3 className="text-center font-bold capitalize">{pokemon.name}</h3>
-      <ul className="text-sm mt-2">
-        <li><strong>XP:</strong> {pokemon.base_experience}</li>
-        <li><strong>Waga:</strong> {pokemon.weight}</li>
-        <li><strong>Wzrost:</strong> {pokemon.height}</li>
-        <li><strong>Typ:</strong> {pokemon.type}</li>
-      </ul>
-    </div>
+    <Link to={`/pokemon/${pokemon.name}`}>
+      <div className="bg-white dark:bg-zinc-100/10 text-zinc-900 dark:text-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-4 flex flex-col items-center gap-2 cursor-pointer">
+        <img
+          src={pokemon.image}
+          alt={pokemon.name}
+          className="w-32 h-32 object-contain"
+        />
+        <h2 className="text-xl font-bold capitalize">{pokemon.name}</h2>
+        <div className="grid grid-cols-2 gap-2 text-sm text-center w-full text-zinc-700 dark:text-zinc-300">
+          <div>
+            <p className="font-semibold">Height</p>
+            <p>{pokemon.height}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Base experience</p>
+            <p>{pokemon.base_experience}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Weight</p>
+            <p>{pokemon.weight}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Ability</p>
+            <p>{pokemon.ability ?? "N/A"}</p>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 };
 

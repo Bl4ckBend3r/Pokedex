@@ -1,18 +1,23 @@
-import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./subpages/home/Home";
+import Login from "./subpages/auth/Login";
+import Register from "./subpages/auth/Register";
+import PokemonDetails from "./subpages/details/PokemonDetails";
 
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <main className="p-4">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 text-black dark:text-white transition-colors">
+      <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* Dodamy kolejne strony później */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/pokemon/:name" element={<PokemonDetails />} />
         </Routes>
-      </main>
-    </Router>
+      </Router>
+    </div>
   );
 };
 
