@@ -5,7 +5,9 @@
       "name": "Witold",
       "email": "witold.g83@gmail.com",
       "password": "5UgX.xuSeRadhXR",
-      "favorites": [],
+      "favorites": [
+        1
+      ],
       "arena": []
     }
   ]

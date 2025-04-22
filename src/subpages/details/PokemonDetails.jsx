@@ -1,25 +1,56 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { Heart } from "lucide-react";
 
 const PokemonDetails = () => {
   const { name } = useParams();
+  const { user, login } = useContext(AuthContext);
   const [pokemon, setPokemon] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await res.json();
-      setPokemon({
+      const details = {
+        id: data.id,
         name: data.name,
         image: data.sprites.other["official-artwork"].front_default,
         base_experience: data.base_experience,
         weight: data.weight,
         height: data.height,
         ability: data.abilities[0]?.ability.name ?? "unknown",
-      });
+      };
+      setPokemon(details);
+
+      if (user?.favorites?.includes(details.id)) {
+        setIsFavorite(true);
+      }
     };
     fetchDetails();
-  }, [name]);
+  }, [name, user]);
+
+  const toggleFavorite = async () => {
+    if (!user) return;
+
+    const updatedFavorites = isFavorite
+      ? user.favorites.filter((id) => id !== pokemon.id)
+      : [...user.favorites, pokemon.id];
+
+    const updatedUser = { ...user, favorites: updatedFavorites };
+
+    await fetch(`http://localhost:3000/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorites: updatedFavorites }),
+    });
+
+    login(updatedUser);
+    setIsFavorite(!isFavorite);
+  };
 
   if (!pokemon) return <div className="text-center text-white">Ładowanie...</div>;
 
@@ -32,7 +63,18 @@ const PokemonDetails = () => {
           className="w-64 h-64 object-contain"
         />
         <div className="text-center lg:text-left">
-          <h1 className="text-4xl font-extrabold mb-4 capitalize">{pokemon.name}</h1>
+          <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
+            <h1 className="text-4xl font-extrabold capitalize">{pokemon.name}</h1>
+            {user && (
+              <button onClick={toggleFavorite}>
+                <Heart
+                  className="w-6 h-6"
+                  fill={isFavorite ? "red" : "none"}
+                  stroke="red"
+                />
+              </button>
+            )}
+          </div>
           <div className="grid grid-cols-2 gap-y-2 text-sm">
             <div>
               <p className="text-zinc-500 dark:text-zinc-400">Height</p>
