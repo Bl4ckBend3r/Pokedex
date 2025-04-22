@@ -4,6 +4,7 @@ import Home from "./subpages/home/Home";
 import Login from "./subpages/auth/Login";
 import Register from "./subpages/auth/Register";
 import PokemonDetails from "./subpages/details/PokemonDetails";
+import Favorites from "./subpages/favorites/Favorites"; 
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/pokemon/:name" element={<PokemonDetails />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </Router>
     </div>
