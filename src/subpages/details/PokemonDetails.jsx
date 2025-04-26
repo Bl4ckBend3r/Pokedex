@@ -51,8 +51,34 @@ const PokemonDetails = () => {
     login(updatedUser);
     setIsFavorite(!isFavorite);
   };
+  const handleAddToArena = async () => {
+    if (!user) return;
 
-  if (!pokemon) return <div className="text-center text-white">Ładowanie...</div>;
+    if (user.arena.length >= 2) {
+      alert("Arena pełna! Najpierw usuń któregoś pokemona.");
+      return;
+    }
+
+    if (user.arena.includes(Number(pokemon.id))) {
+      alert("Ten pokemon już jest na arenie!");
+      return;
+    }
+
+    const updatedArena = [...user.arena, pokemon.id];
+    const updatedUser = { ...user, arena: updatedArena };
+
+    await fetch(`http://localhost:3000/users/${user.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ arena: updatedArena }),
+    });
+
+    login(updatedUser);
+    alert(`${pokemon.name} został dodany do areny!`);
+  };
+
+  if (!pokemon)
+    return <div className="text-center text-white">Ładowanie...</div>;
 
   return (
     <div className="flex justify-center items-center min-h-screen px-4">
@@ -64,7 +90,9 @@ const PokemonDetails = () => {
         />
         <div className="text-center lg:text-left">
           <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
-            <h1 className="text-4xl font-extrabold capitalize">{pokemon.name}</h1>
+            <h1 className="text-4xl font-extrabold capitalize">
+              {pokemon.name}
+            </h1>
             {user && (
               <button onClick={toggleFavorite}>
                 <Heart
@@ -74,6 +102,12 @@ const PokemonDetails = () => {
                 />
               </button>
             )}
+            <button
+              onClick={handleAddToArena}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded"
+            >
+              DO ARENY
+            </button>
           </div>
           <div className="grid grid-cols-2 gap-y-2 text-sm">
             <div>
@@ -81,7 +115,9 @@ const PokemonDetails = () => {
               <p>{pokemon.height}</p>
             </div>
             <div>
-              <p className="text-zinc-500 dark:text-zinc-400">Base experience</p>
+              <p className="text-zinc-500 dark:text-zinc-400">
+                Base experience
+              </p>
               <p>{pokemon.base_experience}</p>
             </div>
             <div>
