@@ -5,6 +5,9 @@ import Login from "./subpages/auth/Login";
 import Register from "./subpages/auth/Register";
 import PokemonDetails from "./subpages/details/PokemonDetails";
 import Favorites from "./subpages/favorites/Favorites"; 
+import Edit from "./subpages/edit/Edit";
+import CreatePokemon from "./subpages/edit/CreatePokemon";
+import Arena from "./subpages/arena/Arena";
 
 const App = () => {
   return (
@@ -17,6 +20,9 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/pokemon/:name" element={<PokemonDetails />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/edit" element={<Edit />} />
+          <Route path="/create" element={<CreatePokemon />} />
+          <Route path="/arena" element={<Arena />} />
         </Routes>
       </Router>
     </div>

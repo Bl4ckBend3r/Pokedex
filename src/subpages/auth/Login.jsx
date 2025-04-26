@@ -22,7 +22,7 @@ const Login = () => {
 
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // <- A TU GO DOSTAJESZ
+  const { login } = useContext(AuthContext); 
 
   const onSubmit = async (data) => {
     try {
