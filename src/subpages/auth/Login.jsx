@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "@/context/AuthContext"; // <- TUTAJ JEST KLUCZ
+import { AuthContext } from "@/context/AuthContext"; 
 
 const loginSchema = z.object({
   email: z.string().email("Niepoprawny email"),
@@ -42,7 +42,7 @@ const Login = () => {
         return;
       }
 
-      login(user); // <- i dopiero TERAZ możesz tego użyć 😘
+      login(user); 
       enqueueSnackbar("Zalogowano pomyślnie!", { variant: "success" });
       navigate("/");
     } catch (error) {

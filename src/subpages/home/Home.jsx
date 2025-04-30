@@ -7,6 +7,41 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pokemonsPerPage = 15;
 
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      const localPokemons = await fetch("http://localhost:3000/pokemons").then(res => res.json());
+  
+      const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150");
+      const data = await res.json();
+     
+      const detailed = await Promise.all(
+        data.results.map(async (p) => {
+          const res = await fetch(p.url);
+          const poke = await res.json();
+  
+          const local = localPokemons.find(lp => String(lp.id) === String(poke.id));
+  
+          return {
+            id: poke.id,
+            name: poke.name,
+            image: poke.sprites.other["official-artwork"].front_default,
+            base_experience: local?.base_experience ?? poke.base_experience ?? 0,
+            weight: local?.weight ?? poke.weight ?? 0,
+            height: local?.height ?? poke.height ?? 0,
+            ability: poke.abilities[0]?.ability?.name ?? "N/A",
+            wins: local?.wins ?? 0,
+            losses: local?.losses ?? 0,
+          };
+        })
+      );
+  
+      setPokemons(detailed);
+    };
+  
+    fetchPokemons();
+  }, []);
+  
+
   const filtered = pokemons.filter((p) =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -16,33 +51,6 @@ const Home = () => {
   const currentPokemons = filtered.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(filtered.length / pokemonsPerPage);
 
-  useEffect(() => {
-    const fetchPokemons = async () => {
-      const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150");
-      const data = await res.json();
-
-      const detailed = await Promise.all(
-        data.results.map(async (p) => {
-          const res = await fetch(p.url);
-          const poke = await res.json();
-          return {
-            id: poke.id,
-            name: poke.name,
-            image: poke.sprites.other["official-artwork"].front_default,
-            base_experience: poke.base_experience,
-            weight: poke.weight,
-            height: poke.height,
-            type: poke.types[0]?.type.name,
-          };
-        })
-      );
-
-      setPokemons(detailed);
-    };
-
-    fetchPokemons();
-  }, []);
-
   return (
     <div className="w-full px-4 sm:px-8">
       <input
@@ -50,7 +58,7 @@ const Home = () => {
         placeholder="Szukaj Pokémona..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 rounded border mb-6"
+        className="w-full p-3 rounded-xl transition bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md"
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 mt-8">

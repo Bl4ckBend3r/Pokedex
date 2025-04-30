@@ -8,21 +8,30 @@ const Favorites = () => {
 
   useEffect(() => {
     const fetchFavorites = async () => {
+      const localPokemons = await fetch("http://localhost:3000/pokemons").then(res => res.json());
+
       const fetched = await Promise.all(
-        user.favorites.map(async (id) => {
+        user.favorites.map(async (rawId) => {
+          const id = String(rawId);
           const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
           const data = await res.json();
+
+          const local = localPokemons.find(lp => String(lp.id) === String(data.id));
+
           return {
             id: data.id,
             name: data.name,
             image: data.sprites.other["official-artwork"].front_default,
-            base_experience: data.base_experience,
-            weight: data.weight,
-            height: data.height,
-            type: data.types[0]?.type.name,
+            base_experience: local?.base_experience ?? data.base_experience ?? 0,
+            weight: local?.weight ?? data.weight ?? 0,
+            height: local?.height ?? data.height ?? 0,
+            ability: data.abilities[0]?.ability?.name ?? "N/A",
+            wins: local?.wins ?? 0,
+            losses: local?.losses ?? 0,
           };
         })
       );
+
       setPokemonList(fetched);
     };
 

@@ -8,6 +8,8 @@ import Favorites from "./subpages/favorites/Favorites";
 import Edit from "./subpages/edit/Edit";
 import CreatePokemon from "./subpages/edit/CreatePokemon";
 import Arena from "./subpages/arena/Arena";
+import Ranking from "@/subpages/ranking/Ranking";
+
 
 const App = () => {
   return (
@@ -23,6 +25,7 @@ const App = () => {
           <Route path="/edit" element={<Edit />} />
           <Route path="/create" element={<CreatePokemon />} />
           <Route path="/arena" element={<Arena />} />
+          <Route path="/ranking" element={<Ranking />} />
         </Routes>
       </Router>
     </div>

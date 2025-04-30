@@ -33,15 +33,24 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await fetch("http://localhost:3000/users?email=" + data.email);
-      const existing = await res.json();
-
-      if (existing.length > 0) {
-        enqueueSnackbar("Użytkownik już istnieje!", { variant: "error" });
+      const res = await fetch(`http://localhost:3000/users`);
+      const users = await res.json();
+  
+      const emailExists = users.some((u) => u.email === data.email);
+      const nameExists = users.some((u) => u.name === data.name);
+  
+      if (emailExists) {
+        enqueueSnackbar("Użytkownik o takim emailu już istnieje.", { variant: "error" });
         return;
       }
+  
+      if (nameExists) {
+        enqueueSnackbar("Użytkownik o takiej nazwie już istnieje.", { variant: "error" });
+        return;
+      }
+  
 
-      await fetch("http://localhost:3000/users", {
+      await fetch(`http://localhost:3000/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -52,15 +61,16 @@ const Register = () => {
           arena: [],
         }),
       });
-
-      enqueueSnackbar("Rejestracja zakończona sukcesem!", { variant: "success" });
+  
+      enqueueSnackbar("Zarejestrowano pomyślnie!", { variant: "success" });
       navigate("/login");
     } catch (error) {
       enqueueSnackbar("Błąd rejestracji", { variant: "error" });
-      console.error("Register error:", error);
+      console.error("Registration error:", error);
     }
   };
-
+  
+  
   return (
     <div className="flex justify-center items-center min-h-screen px-4">
       <form
