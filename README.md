@@ -1,12 +1,82 @@
-# React + Vite
+# Pokedex Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikacja internetowa stworzona w technologii React, umożliwiająca zarządzanie kolekcją Pokémonów z wykorzystaniem lokalnej bazy danych JSON Server. Projekt zawiera funkcjonalności związane z przeglądaniem, edycją, tworzeniem, walkami Pokémonów oraz systemem rankingowym.
 
-Currently, two official plugins are available:
+## Uruchamianie aplikacji
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Wymagania wstępne
 
-## Expanding the ESLint configuration
+- Node.js (zalecana wersja: LTS)
+- NPM lub Yarn
+- Zainstalowany `json-server`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Instalacja
+
+1. Zainstaluj zależności:
+
+```bash
+npm install
+```
+
+2. Uruchom serwer danych (JSON Server):
+
+```bash
+npm run server
+# lub alternatywnie:
+json-server --watch db.json --port 3000
+```
+
+3. Uruchom aplikację developerską:
+
+```bash
+npm run dev
+```
+
+Aplikacja będzie dostępna pod adresem: [http://localhost:5173](http://localhost:5173)
+
+## Funkcjonalności
+
+### Autoryzacja
+
+- Obsługa lokalnych użytkowników (przechowywanych w pliku `db.json`)
+- Możliwość zapamiętania ulubionych Pokémonów oraz przypisania Pokémonów do Areny
+
+### Strona główna
+
+- Lista 150 Pokémonów z API oraz lokalnie stworzonych
+- Wyświetlanie statystyk wygranych i przegranych (W/L)
+- Możliwość wyszukiwania i paginacji
+
+### Szczegóły Pokémona
+
+- Widok szczegółów z możliwością dodania do ulubionych i na Arenę
+- Synchronizacja danych z lokalnym serwerem
+
+### Arena
+
+- Porównanie dwóch Pokémonów na podstawie ich wagi i doświadczenia
+- Zwycięzca otrzymuje dodatkowe doświadczenie i statystykę wygranej
+- Przegrany otrzymuje statystykę porażki
+
+### Ranking
+
+- Lista wszystkich Pokémonów posortowana według wybranego kryterium
+- Obsługa sortowania po: doświadczeniu, wadze, wzroście, liczbie wygranych i przegranych
+
+### Ulubione
+
+- Lista ulubionych Pokémonów przypisana do aktualnego użytkownika
+
+### Edycja
+
+- Możliwość edycji atrybutów istniejących Pokémonów
+- Formularz walidowany za pomocą `React Hook Form` oraz `Zod`
+- Obsługa tworzenia nowych Pokémonów z wyborem nieużywanej grafiki (151+)
+- Powrót na stronę główną po zapisaniu zmian
+
+## Konwencje
+
+- Projekt oparty na modularnej strukturze komponentów
+- Walidacja danych użytkownika i formularzy z użyciem `React Hook Form` i `Zod`
+- Stylizacja z wykorzystaniem Tailwind CSS
+- Przechowywanie danych i stanu użytkownika w `Context API`

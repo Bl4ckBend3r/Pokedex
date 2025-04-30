@@ -15,7 +15,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full bg-slate-800 text-white px-4 py-3 flex items-center justify-between">
+    <nav
+  className={`w-full px-4 py-3 flex items-center justify-between ${
+    isDark ? "bg-zinc-900 text-white" : "bg-blue-100 text-zinc-900"
+  }`}
+>
+
       <div className="flex items-center space-x-4">
         <Link to="/">
           <h1 className="text-2xl font-bold text-blue-400">Pokedex</h1>
