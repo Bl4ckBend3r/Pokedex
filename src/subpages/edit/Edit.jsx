@@ -5,6 +5,7 @@ import { z } from "zod";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchFullCollection } from "@/utils/fetchFullCollection";
+import { usePokemonCollection } from "@/hooks/usePokemonCollection"
 
 const schema = z.object({
   weight: z.number().min(1, "Wymagana liczba większa od zera"),
@@ -15,7 +16,7 @@ const schema = z.object({
 const Edit = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [pokemons, setPokemons] = useState([]);
+  const { pokemons, loading } = usePokemonCollection();
   const [editId, setEditId] = useState(null);
 
   const {
@@ -33,14 +34,14 @@ const Edit = () => {
     },
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fullList = await fetchFullCollection();
-      setPokemons(fullList);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const fullList = await fetchFullCollection();
+  //     setPokemons(fullList);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const handleEditClick = (pokemon) => {
     setEditId(pokemon.id);

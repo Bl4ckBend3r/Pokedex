@@ -1,8 +1,53 @@
 {
   "users": [
-
+    {
+      "id": "41a9",
+      "name": "stefan",
+      "email": "stefan@stefa.pl",
+      "password": "12345678A.",
+      "favorites": [
+        "1",
+        "d713"
+      ],
+      "arena": [
+        "2",
+        "d713"
+      ]
+    }
   ],
   "pokemons": [
-    
+    {
+      "id": "d713",
+      "name": "Witek",
+      "weight": 69,
+      "height": 69,
+      "base_experience": 2147,
+      "ability": "lol",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png",
+      "wins": 1,
+      "losses": 0
+    },
+    {
+      "id": "2",
+      "name": "ivysaur",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+      "base_experience": 100,
+      "weight": 130,
+      "height": 10,
+      "ability": "overgrow",
+      "wins": 2,
+      "losses": 7
+    },
+    {
+      "id": "1",
+      "name": "bulbasaur",
+      "weight": 69,
+      "height": 7,
+      "base_experience": 64,
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      "ability": "overgrow",
+      "wins": 0,
+      "losses": 2
+    }
   ]
 }

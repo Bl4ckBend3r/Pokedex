@@ -120,7 +120,7 @@ const Arena = () => {
     }
 
     await Promise.all([
-      fetch(`http://localhost:3000/pokemons/${Number(winner.id)}`, {
+      fetch(`http://localhost:3000/pokemons/${winner.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -129,7 +129,7 @@ const Arena = () => {
           losses: Number(winner.losses || 0),
         }),
       }),
-      fetch(`http://localhost:3000/pokemons/${Number(loser.id)}`, {
+      fetch(`http://localhost:3000/pokemons/${loser.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

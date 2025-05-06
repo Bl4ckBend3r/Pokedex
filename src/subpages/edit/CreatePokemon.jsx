@@ -75,7 +75,9 @@ const CreatePokemon = () => {
 
   return (
     <div className="max-w-xl mx-auto py-10 px-6">
-      <h2 className="text-3xl font-bold text-white text-center mb-6">Stwórz Pokemona</h2>
+      <h2 className="text-3xl font-bold text-white text-center mb-6">
+        Stwórz Pokemona
+      </h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -83,37 +85,78 @@ const CreatePokemon = () => {
       >
         <div>
           <label className="block mb-1">Nazwa</label>
-          <input {...register("name")} className="w-full p-2 rounded border" />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          <input
+            {...register("name")}
+            className="w-full p-2 rounded border text-black dark:text-white bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block mb-1">Waga</label>
-            <input type="number" {...register("weight", { valueAsNumber: true })} className="w-full p-2 rounded border" />
-            {errors.weight && <p className="text-red-500 text-sm">{errors.weight.message}</p>}
+            <input
+              type="number"
+              {...register("weight", { valueAsNumber: true })}
+              className="w-full p-2 rounded border text-black dark:text-white bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600"
+            />
+            {errors.weight && (
+              <p className="text-red-500 text-sm">{errors.weight.message}</p>
+            )}
           </div>
           <div>
             <label className="block mb-1">Wzrost</label>
-            <input type="number" {...register("height", { valueAsNumber: true })} className="w-full p-2 rounded border" />
-            {errors.height && <p className="text-red-500 text-sm">{errors.height.message}</p>}
+            <input
+              type="number"
+              {...register("height", { valueAsNumber: true })}
+              className="w-full p-2 rounded border text-black dark:text-white bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600"
+            />
+            {errors.height && (
+              <p className="text-red-500 text-sm">{errors.height.message}</p>
+            )}
           </div>
           <div>
             <label className="block mb-1">Doświadczenie</label>
-            <input type="number" {...register("base_experience", { valueAsNumber: true })} className="w-full p-2 rounded border" />
-            {errors.base_experience && <p className="text-red-500 text-sm">{errors.base_experience.message}</p>}
+            <input
+              type="number"
+              {...register("base_experience", { valueAsNumber: true })}
+              className="w-full p-2 rounded border text-black dark:text-white bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600"
+            />
+            {errors.base_experience && (
+              <p className="text-red-500 text-sm">
+                {errors.base_experience.message}
+              </p>
+            )}
           </div>
           <div>
             <label className="block mb-1">Zdolność</label>
-            <input {...register("ability")} className="w-full p-2 rounded border" />
-            {errors.ability && <p className="text-red-500 text-sm">{errors.ability.message}</p>}
+            <input
+              {...register("ability")}
+              className="w-full p-2 rounded border text-black dark:text-white bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600"
+            />
+            {errors.ability && (
+              <p className="text-red-500 text-sm">{errors.ability.message}</p>
+            )}
           </div>
         </div>
 
         <div className="mt-6 flex items-center justify-center gap-4">
-          <button type="button" onClick={() => setIndex((prev) => Math.max(151, prev - 1))}>&larr;</button>
-          <img src={imageUrl} alt="Preview" className={`w-32 h-32 ${isImageUsed ? "opacity-30" : ""}`} />
-          <button type="button" onClick={() => setIndex((prev) => prev + 1)}>&rarr;</button>
+          <button
+            type="button"
+            onClick={() => setIndex((prev) => Math.max(151, prev - 1))}
+          >
+            &larr;
+          </button>
+          <img
+            src={imageUrl}
+            alt="Preview"
+            className={`w-32 h-32 ${isImageUsed ? "opacity-30" : ""}`}
+          />
+          <button type="button" onClick={() => setIndex((prev) => prev + 1)}>
+            &rarr;
+          </button>
         </div>
 
         <button
