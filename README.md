@@ -21,9 +21,7 @@ npm install
 2. Uruchom serwer danych (JSON Server):
 
 ```bash
-npm run server
-# lub alternatywnie:
-json-server --watch db.json --port 3000
+npx json-server --watch db.json --port 3000
 ```
 
 3. Uruchom aplikację developerską:
