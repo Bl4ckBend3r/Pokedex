@@ -1,8 +1,47 @@
 {
   "users": [
-
+    {
+      "id": "a2d5",
+      "name": "stefan",
+      "email": "stefan@stefa.pl",
+      "password": "12345678A.",
+      "favorites": [],
+      "arena": []
+    }
   ],
   "pokemons": [
-    
+    {
+      "id": "962a",
+      "name": "ddsa",
+      "weight": 69,
+      "height": 69,
+      "base_experience": 2137,
+      "ability": "Kremóki",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png",
+      "wins": 0,
+      "losses": 0
+    },
+    {
+      "id": "d592",
+      "name": "Witold",
+      "weight": 69,
+      "height": 69,
+      "base_experience": 2137,
+      "ability": "Kremóki",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/152.png",
+      "wins": 0,
+      "losses": 0
+    },
+    {
+      "id": "1",
+      "name": "bulbasaur",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      "base_experience": 64,
+      "weight": 34,
+      "height": 7,
+      "ability": "overgrow",
+      "wins": 0,
+      "losses": 0
+    }
   ]
 }

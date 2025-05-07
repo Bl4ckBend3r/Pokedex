@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { fetchFullCollection } from "@/utils/fetchFullCollection"; 
+import { usePokemonCollection } from "@/hooks/usePokemonCollection";
 
 const sortOptions = [
   { label: "Doświadczenie", value: "base_experience" },
@@ -10,17 +11,17 @@ const sortOptions = [
 ];
 
 const Ranking = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const { pokemons, loading, refetch } = usePokemonCollection();
   const [sortBy, setSortBy] = useState("wins");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fullList = await fetchFullCollection();
-      setPokemons(fullList);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const fullList = await fetchFullCollection();
+  //     setPokemons(fullList);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const sortedPokemons = [...pokemons].sort((a, b) => b[sortBy] - a[sortBy]);
 
